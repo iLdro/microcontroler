@@ -3,44 +3,48 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 
-entity buffer4bits_test is
-end buffer4bits_test;
+entity mem2bits_test is
+end mem2bits_test;
 
-architecture buffer4bits_test_Arch of buffer4bits_test is
+architecture mem2bits_test_Arch of mem2bits_test is
 
-    component buffer4bits is
+    component mem2bits is
         port (
-            e : in std_logic_vector (3 downto 0);
+            e1 : in std_logic;
+            e2 : in std_logic;
             reset : in std_logic;
             preset : in std_logic;
             clock : in std_logic;
             ce : in std_logic;
-            s1 : out std_logic_vector (3 downto 0)
+            s1 : out std_logic_vector (1 downto 0)
         );
     end component;
 
-    signal e_t : std_logic_vector (3 downto 0);
+    signal e1_t : std_logic;
+    signal e2_t : std_logic;
     signal reset : std_logic;
     signal preset : std_logic;
     signal clock : std_logic;
     signal ce_t : std_logic;
-    signal s1 : std_logic_vector (3 downto 0);
+    signal s1 : std_logic_vector (1 downto 0);
 
 begin
     
-    mem4bits_test_comp : buffer4bits
+    mem2bits_test_comp : mem2bits
         port map (
-            e => e_t,
+            e1 => e1_t,
+            e2 => e2_t,
             reset => reset,
             preset => preset,
             clock => clock,
             ce => ce_t,
             s1 => s1
         );
-        
+
     process
-    begin   
-    	e_t <= "0110";
+    begin
+        e1_t <= '0';
+        e2_t <= '1';
         ce_t <= '1';
         reset <= '0';
         preset <= '0';
@@ -53,4 +57,4 @@ begin
         wait;
     end process;
 
-end buffer4bits_test_Arch;
+end mem2bits_test_Arch;

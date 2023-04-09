@@ -3,12 +3,12 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 
-entity buffer4bits_test is
-end buffer4bits_test;
+entity mem4bits_test is
+end mem4bits_test;
 
-architecture buffer4bits_test_Arch of buffer4bits_test is
+architecture mem4bits_test_Arch of mem4bits_test is
 
-    component buffer4bits is
+    component mem4bits is
         port (
             e : in std_logic_vector (3 downto 0);
             reset : in std_logic;
@@ -28,7 +28,7 @@ architecture buffer4bits_test_Arch of buffer4bits_test is
 
 begin
     
-    mem4bits_test_comp : buffer4bits
+    mem4bits_test_comp : mem4bits
         port map (
             e => e_t,
             reset => reset,
@@ -53,4 +53,4 @@ begin
         wait;
     end process;
 
-end buffer4bits_test_Arch;
+end mem4bits_test_Arch;
