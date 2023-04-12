@@ -22,9 +22,7 @@ end microprocessor;
 
 architecture microprocessor_Arch of microprocessor is
 
-    signal microcontroleur_SR_OUT_L : std_logic;
-    signal microcontroleur_SR_OUT_R : std_logic;
-    signal microcontroleur_RES_out : std_logic_vector(3 downto 0);
+    
 
     --Signaux pour le controle de la memoire d'instruction
     signal meminstruction_select_fonction : std_logic_vector(3 downto 0);
@@ -55,7 +53,10 @@ architecture microprocessor_Arch of microprocessor is
     signal ALU_S_out: std_logic_vector(7 downto 0);
 
     --Signaux pour SEL_OUT 
-    
+    signal  SEL_OUT_RES_out: std_logic_vector(3 downto 0);
+    signal  SEL_OUT_SR_OUT_L: std_logic;
+    signal SEL_OUT_SR_OUT_R: std_logic;
+
 
 
 
@@ -217,21 +218,18 @@ architecture microprocessor_Arch of microprocessor is
             MEM2_out => memroute_mem_2_out,
             S_OUT => ALU_S_out,
             SR_IN_LR => memroute_SR_in_L_R,
-            RES_out => microcontroleur_RES_out,
-            SR_OUT_L => microcontroleur_RES_SR_out_L,
-            SR_OUT_R => microcontroleur_RES_SR_out_R
+            RES_out => SEL_OUT_RES_out,
+            SR_OUT_L => SEL_OUT_SR_OUT_L,
+            SR_OUT_R => SEL_OUT_SR_OUT_R
         );
 
         process(clk, reset)
             begin
                 if (clk ='0') then 
-                SR_OUT_L <=  microcontroleur_RES_SR_out_L;
-                SR_OUT_R <=  microcontroleur_RES_SR_out_R;
-                RES <=  microcontroleur_RES_out;
+                SR_OUT_L <=  SEL_OUT_SR_OUT_L;
+                SR_OUT_R <=  SEL_OUT_SR_OUT_R;
+                RES <=  Sel_OUT_RES_out;
                 end if;
         end process;
 
     end architecture;
-
-        
-

@@ -23,10 +23,26 @@ architecture meminstruction_Arch of meminstruction is
     signal pointeur : integer range 0 to 127 := 0;
 
     constant MemInstruction_arr : memory := (
-        ("0001111001"),
+        ("0000011100"),-- On charge A dans buff A
+        ("1101111111"),-- On charge B dans buff B, on multiplie et sors S
         ("0000000000"),
-        ("0000000000")
-
+        ("0000000000"),
+        ("0000000000"),
+        ("0000011100"),-- On charge A dans buff A
+        ("1100111100"),-- On charge B dans buff B et on multiplie A par B
+        ("0000110100"),-- On charge S dans le BUff B 
+        ("1001011100"),-- On charge A dans buff A, on fait le xor
+        ("0101010111"),-- On charge S dans A on effectue un notre dessus et on le sors
+        ("0000000000"),
+        ("0000000000"),
+        ("0000000000"),
+        ("0000011100"),-- On charge A0 dans buff A, 
+        ("0100111110"),--On charge B0 dans buff B, on le sors et le copie dans MEM_CACHE2
+        ("0111111101"),-- On charge B1 dans Buff B on fait le AND et on le copie dans MEM_CACHE1
+        ("0000100100"),-- On copie les bits de points faible de MEM_CACHE2 dans buffer_B, soit B0 dans le buffer B
+        ("0111011110"),-- On charge A1 dans buff A, on fait le and et on le copie dans MEM_CACHE2
+        ("0000001100")-- On charge 4 bits de points faible de MEM_CACHE1 dans buffer_A, 
+        ("1000100101")-- On charge les 4 bits de points faible de MEM_CACHE2 dans buffer_B soit ,on fait le or et sors le résultat
 
     );
 
