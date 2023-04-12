@@ -32,6 +32,7 @@ architecture ALU_test_Arch of ALU_test is
     signal result : std_logic_vector(7 downto 0);
     signal SR_OUT_L_R : std_logic_vector(1 downto 0);
     signal S : std_logic_vector(7 downto 0);
+    signal Slow : std_logic_vector(3 downto 0);
 
 begin
 
@@ -46,9 +47,9 @@ begin
             SR_OUT_L_R_out => SR_OUT_L_R,
             S_out => S
         );
-    a <= "0001";
-    b <= "0010";
-    SEL_FCT_ALU <= "1101";
+    a <= "0001";	
+    b <= "1010";
+    SEL_FCT_ALU <= "1011";
     SR_IN_L_R <= "10";
 
    

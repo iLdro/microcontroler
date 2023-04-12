@@ -7,7 +7,6 @@ use ieee.std_logic_unsigned.all;
 entity mem2bits is
     port (
         e1 : in std_logic;
-        e2 : in std_logic;
         reset : in std_logic;
         preset : in std_logic;
         clock : in std_logic;
@@ -30,8 +29,7 @@ architecture mem2bits_Arch of mem2bits is
                 if (preset = '1') then
                     s1 <= (others => '1');
                 else
-                    s1(1) <= e1;
-                    s1(0) <= e2;
+                    s1 <= e1;
                 end if;
             end if;
         end process;

@@ -131,11 +131,7 @@ architecture arch_ALU of ALU is
                 SR_OUT_L_R_out(0) <= '0';
 
              when "1101" => -- multiplication binaire
-                A_temp(3 downto 0) := A_in;
-                A_temp(7 downto 4) := (others => A(3));
-                B_temp(3 downto 0) := B_in;
-                B_temp(7 downto 4) := (others => B(3));
-                S <= std_logic_vector(signed(A_temp) * signed(B_temp));
+                S <= std_logic_vector(signed(A_in) * signed(B_in));
                 SR_OUT_L_R_out(1) <= '0';
                 SR_OUT_L_R_out(0) <= '0';
             
