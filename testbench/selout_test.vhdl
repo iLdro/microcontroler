@@ -29,7 +29,7 @@ architecture selout_test_Arch of selout_test is
     signal MEM2_out_t : std_logic_vector(3 downto 0) ;
     signal S_OUT_t : std_logic_vector(3 downto 0) ;
     signal RES_out_t : std_logic_vector(3 downto 0) ;
-    signal SR_IN_LR_t : std_logic ;
+    signal SR_IN_LR_t : std_logic_vector(1 downto 0) ;
     signal SR_OUT_L_t : std_logic ;
     signal SR_OUT_R_t : std_logic ;
 
@@ -55,10 +55,10 @@ begin
         MEM1_out_t <= "0010";
         MEM2_out_t <= "0001";
         S_OUT_t <= "0100";
-        SR_IN_LR_t <= '00';
-        clk <= '0';
-        wait for 10 ns;
+        SR_IN_LR_t <= "00";
         clk <= '1';
+        wait for 10 ns;
+        clk <= '0';
         wait for 10 ns;
         report "Sortie " & integer'image(to_integer(unsigned(RES_out_t)));
         wait;

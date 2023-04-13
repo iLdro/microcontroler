@@ -2,7 +2,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-entity selroute is
+entity selroute_signal is
     Port ( 
         -- Clock et reset
         CLK : in STD_LOGIC;
@@ -29,9 +29,9 @@ entity selroute is
 
 
     );
-end selroute;
+end selroute_signal;
 
-architecture selroute_Arch of selroute is
+architecture selroute_signal_Arch of selroute_signal is
 
     signal CE_Mem_1 : STD_LOGIC;
     signal CE_Mem_2 : STD_LOGIC;
@@ -55,29 +55,29 @@ architecture selroute_Arch of selroute is
                                 when "0000" => -- Stockage de S dans MEM_CACHE_1
                                         CE_Mem_1 <= '1';
                                         CE_Mem_2 <= '0';
-                                        CE_Buf_A <= '1';
+                                        CE_Buf_A <= '0';
                                         CE_Buf_B <= '0';
                                         mem_1_out <= S;
                                 when "0001" => -- Stockage de MEM_CACHE_2 dans le buffer_A (4 bits de poids faibles)
                                         CE_Mem_1 <= '0';
-                                        CE_Mem_2 <= '1';
+                                        CE_Mem_2 <= '0';
                                         CE_Buf_A <= '1';
                                         CE_Buf_B <= '0';
                                         bufferA_out <= Mem_2_in(3 downto 0);
                                 when "0010" => -- Stockage de MEM_CACHE_2 dans le buffer_A (4 bits de poids fort)
                                         CE_Mem_1 <= '0';
-                                        CE_Mem_2 <= '1';
+                                        CE_Mem_2 <= '0';
                                         CE_Buf_A <= '1';
                                         CE_Buf_B <= '0';
                                         bufferA_out<= Mem_2_in(7 downto 4);
                                 when "0011" => -- Stockage de MEM_CACHE_1 dans le buffer_A (4 bits de poids faibles)
-                                        CE_Mem_1 <= '1';
+                                        CE_Mem_1 <= '0';
                                         CE_Mem_2 <= '0';
                                         CE_Buf_A <= '1';
                                         CE_Buf_B <= '0';
-                                        bufferA_out <= Mem_1_out(3 downto 0);
+                                        bufferA_out <= Mem_1_in(3 downto 0);
                                 when "0100" => -- Stockage de MEM_CACHE_1 dans le buffer_A (4 bits de poids forts)
-                                        CE_Mem_1 <= '1';
+                                        CE_Mem_1 <= '0';
                                         CE_Mem_2 <= '0';
                                         CE_Buf_A <= '1';
                                         CE_Buf_B <= '0';
@@ -108,24 +108,24 @@ architecture selroute_Arch of selroute is
                                         mem_2_out <= S;
                                 when "1001" => -- Stockage de MEM_CACHE_2 dans Buffer_B(4 bits de poids faibles)
                                         CE_Mem_1 <= '0';
-                                        CE_Mem_2 <= '1';
+                                        CE_Mem_2 <= '0';
                                         CE_Buf_A <= '0';
                                         CE_Buf_B <= '1';
                                         bufferB_out <= Mem_2_in(3 downto 0);
                                 when "1010" => -- Stockage de MEM_CACHE_2 dans Buffer_B(4 bits de poids forts)
                                         CE_Mem_1 <= '0';
-                                        CE_Mem_2 <= '1';
+                                        CE_Mem_2 <= '0';
                                         CE_Buf_A <= '0';
                                         CE_Buf_B <= '1';
-                                        bufferB_out <= Mem_2_out(7 downto 4);
+                                        bufferB_out <= Mem_2_in(7 downto 4);
                                 when "1011" => -- Stockage de MEM_CACHE_1 dans Buffer_B(4 bits de poids faibles)
-                                        CE_Mem_1 <= '1';
+                                        CE_Mem_1 <= '0';
                                         CE_Mem_2 <= '0';
                                         CE_Buf_A <= '0';
                                         CE_Buf_B <= '1';
                                         BufferB_out <= Mem_1_in(3 downto 0);
                                 when "1100" => -- Stockage de MEM_CACHE_1 dans Buffer_B(4 bits de poids forts)
-                                        CE_Mem_1 <= '1';
+                                        CE_Mem_1 <= '0';
                                         CE_Mem_2 <= '0';
                                         CE_Buf_A <= '0';
                                         CE_Buf_B <= '1';
@@ -154,4 +154,4 @@ architecture selroute_Arch of selroute is
                 end if;
         end process;
 
-end selroute_Arch;
+end selroute_signal_Arch;

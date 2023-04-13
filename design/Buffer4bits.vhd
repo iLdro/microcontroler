@@ -1,56 +1,35 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.std_logic_unsigned.all;
 
 
-entity buffer4bits_test is
-end buffer4bits_test;
+entity buffer4bits is
+    port (
+        e : in std_logic_vector (3 downto 0);
+        reset : in std_logic;
+        preset : in std_logic;
+        ce : in std_logic;
+        clock : in std_logic;
+        s1 : out std_logic_vector (3 downto 0)
+    );
+end buffer4bits;
 
-architecture buffer4bits_test_Arch of buffer4bits_test is
+architecture buffer4bits_Arch of buffer4bits is
 
-    component buffer4bits is
-        port (
-            e : in std_logic_vector (3 downto 0);
-            reset : in std_logic;
-            preset : in std_logic;
-            clock : in std_logic;
-            ce : in std_logic;
-            s1 : out std_logic_vector (3 downto 0)
-        );
-    end component;
+    begin
+        -- process explicite - instructions séquentielle
+        MyBufferNbitsProc : process (reset, clock)
+        begin 
+            if (reset = '1') then
+                s1 <= (others => '0');
+            elsif (rising_edge(clock)) and (ce = '1') then
+                if (preset = '1') then
+                    s1 <= (others => '1');
+                else
+                    s1 <= e;
+                end if;
+            end if;
+        end process;
 
-    signal e_t : std_logic_vector (3 downto 0);
-    signal reset : std_logic;
-    signal preset : std_logic;
-    signal clock : std_logic;
-    signal ce_t : std_logic;
-    signal s1 : std_logic_vector (3 downto 0);
-
-begin
-    
-    mem4bits_test_comp : buffer4bits
-        port map (
-            e => e_t,
-            reset => reset,
-            preset => preset,
-            clock => clock,
-            ce => ce_t,
-            s1 => s1
-        );
-        
-    process
-    begin   
-    	e_t <= "0110";
-        ce_t <= '1';
-        reset <= '0';
-        preset <= '0';
-        clock <= '0';
-        wait for 1 ns;
-        clock <= '1';
-        wait for 1 ns;
-        clock <= '0';
-        report "entrée retenu " & integer'image(to_integer(unsigned(s1)));
-        wait;
-    end process;
-
-end buffer4bits_test_Arch;
+end buffer4bits_Arch;

@@ -11,6 +11,7 @@ architecture buffer2bits_test_Arch of buffer2bits_test is
     component buffer2bits is
         port (
             e1 : in std_logic;
+            e2 : in std_logic;
             reset : in std_logic;
             preset : in std_logic;
             clock : in std_logic;
@@ -19,6 +20,7 @@ architecture buffer2bits_test_Arch of buffer2bits_test is
     end component;
 
     signal e1_t : std_logic;
+    signal e2_t : std_logic;
     signal reset : std_logic;
     signal preset : std_logic;
     signal clock : std_logic;
@@ -29,6 +31,7 @@ begin
     buffer2bits_test_comp : buffer2bits
         port map (
             e1 => e1_t,
+            e2 => e2_t,
             reset => reset,
             preset => preset,
             clock => clock,
@@ -38,6 +41,7 @@ begin
     process
     begin
         e1_t <= '0';
+        e2_t <= '1';
         reset <= '0';
         preset <= '0';
         clock <= '0';

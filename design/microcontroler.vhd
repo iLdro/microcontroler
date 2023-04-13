@@ -7,14 +7,14 @@ entity microprocessor is
     port(
         clk: in std_logic;
         reset: in std_logic;
-        A_in : in std_logic_vector(3 downto 0);
-        B_in : in std_logic_vector(3 downto 0);
-        SR_in_L : in std_logic;
-        SR_in_R : in std_logic;
+        m_A_in : in std_logic_vector(3 downto 0);
+        m_B_in : in std_logic_vector(3 downto 0);
+        m_SR_in_L : in std_logic;
+        m_SR_in_R : in std_logic;
 
-        SR_out_L : out std_logic;
-        SR_out_R : out std_logic;
-        RES_out : out std_logic_vector(3 downto 0)
+        m_SR_out_L : out std_logic;
+        m_SR_out_R : out std_logic;
+        m_RES_out : out std_logic_vector(3 downto 0)
         
     );
 end microprocessor;
@@ -188,8 +188,8 @@ architecture microprocessor_Arch of microprocessor is
             PRESET => '0',
             SR_IN_L => SR_in_L,
             SR_IN_R => SR_in_R,
-            A_IN => A_in,
-            B_IN => B_in,
+            A_IN => m_A_in,
+            B_IN => m_B_in,
             S => ALU_S_out,
             SEL_ROUTE => meminstruction_select_route,
             SR_IN_L_R => memroute_SR_in_L_R,
@@ -225,10 +225,13 @@ architecture microprocessor_Arch of microprocessor is
 
         process(clk, reset)
             begin
-                if (clk ='0') then 
-                SR_OUT_L <=  SEL_OUT_SR_OUT_L;
-                SR_OUT_R <=  SEL_OUT_SR_OUT_R;
-                RES <=  Sel_OUT_RES_out;
+                if(clk = '1') then
+                    memfonction_ce <= '1';
+                    memout_ce <= '1';
+                elsif (clk ='0') then 
+                m_SR_OUT_L <=  SEL_OUT_SR_OUT_L;
+                m_SR_OUT_R <=  SEL_OUT_SR_OUT_R;
+                m_RES <=  Sel_OUT_RES_out;
                 end if;
         end process;
 

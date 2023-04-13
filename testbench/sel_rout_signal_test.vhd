@@ -8,7 +8,7 @@ end selroute_test_l;
 
 architecture selroute_test_arch of selroute_test_l is
 
-    component selroute 
+    component selroute_signal 
      Port ( 
         -- Clock et reset
         CLK : in STD_LOGIC;
@@ -60,7 +60,7 @@ architecture selroute_test_arch of selroute_test_l is
 
 begin
     
-        selroute_inst : selroute
+        selroute_inst : selroute_signal
         port map(
             CLK => CLK_t,
             RESET => RESET_t,
@@ -94,11 +94,14 @@ begin
             SR_IN_L_t <= '1';
             SR_IN_R_t <= '1';
             A_IN_t <= "0001";
+            mem_1_in_t <= "00101000";
+            mem_2_in_t <="00101000";
             B_IN_t <= "0010";
-            S_t <= "00000001";
-            SEL_ROUTE_t <= "0001";
+            S_t <= "00010011";
+            SEL_ROUTE_t <= "0101";
             wait for 10 ns;
             report "entrée retenu " & integer'image(to_integer(unsigned(bufferA_out_t)));
+            wait;
         end process;
     
 end selroute_test_arch;
